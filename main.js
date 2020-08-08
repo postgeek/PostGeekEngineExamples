@@ -1,5 +1,5 @@
 import start from '@postgeek/post-geek-engine/lib/Game';
-import CollisionScene from './CollisionScene';
+import CollisionScene from 'examples/CollisionScene';
 
 import './style.scss';
 
