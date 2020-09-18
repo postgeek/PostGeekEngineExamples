@@ -1,11 +1,13 @@
 import start from '@postgeek/post-geek-engine/lib/Game';
 import CollisionScene from 'examples/CollisionScene';
+import SnakeScene from 'examples/SnakeScene';
 
 import './style.scss';
 
 class Main {
   constructor() {
     this._demos = [
+      { key: 'snakescene', scene: SnakeScene, name: 'Snake' },
       { key: 'collisionscene', scene: CollisionScene, name: 'Collision Demo' },
     ]
   }
