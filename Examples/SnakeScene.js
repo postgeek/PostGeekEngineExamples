@@ -9,7 +9,6 @@ import Color from '@postgeek/post-geek-engine/lib/renderingEngine/colors/Color';
 import GeometryStyle from '@postgeek/post-geek-engine/lib/renderingEngine/geometry/GeometryStyle';
 
 export default class SnakeScene extends Scene {
-
   create() {
     this.width = 1200;
     this.height = 500;
@@ -35,18 +34,18 @@ export default class SnakeScene extends Scene {
     this.greenSquareStyle = this.snakeBody[0].geometryStyle = new GeometryStyle({ fillStyle: Color.GREEN });
     this.whiteSquareStyle = this.snakeBody[0].geometryStyle = new GeometryStyle({ fillStyle: Color.WHITE, strokeStyle: Color.BLACK });
 
-    this.scoreText = new TextGraphic(new Point(600,40), this.snakeBody.length - 1);
+    this.scoreText = new TextGraphic(new Point(600, 40), this.snakeBody.length - 1);
     this.scoreText.textStyle = new TextStyle({
-        strokeStyle: Color.WHITE,
-        fillStyle: Color.AQUAMARINE,
-        font: '32px Arial',
+      strokeStyle: Color.WHITE,
+      fillStyle: Color.AQUAMARINE,
+      font: '32px Arial',
     });
 
-    this.pausedText = new TextGraphic(new Point(300, 200), "PAUSED");
+    this.pausedText = new TextGraphic(new Point(300, 200), 'PAUSED');
     this.pausedText.textStyle = new TextStyle({
-        strokeStyle: Color.WHITE,
-        fillStyle: Color.AQUAMARINE,
-        font: '128px Arial',
+      strokeStyle: Color.WHITE,
+      fillStyle: Color.AQUAMARINE,
+      font: '128px Arial',
     });
     this.pausedText.point.x = (this.width - this.pausedText.measureText()) / 2;
     this.pausedText.point.y = this.height / 2;
@@ -77,97 +76,99 @@ export default class SnakeScene extends Scene {
   }
 
   update(timestep) {
-    if(!this.paused) {
-        if(this.currentTicks >= this.ticksPerRound) {
-            this.updateSnake();
-            this.currentTicks -= this.ticksPerRound;
-        }
-        if (this.direction !== 'down' && (this.keyboard.keyDownOnce(KeyboardKey.UP) || this.keyboard.keyDownOnce(KeyboardKey.W))) {
-            this.movementVector = new Point(0, -this.scale);
-            this.direction = 'up';
-        } else if (this.direction !== 'up' && (this.keyboard.keyDownOnce(KeyboardKey.DOWN) || this.keyboard.keyDownOnce(KeyboardKey.S))) {
-            this.movementVector = new Point(0, this.scale);
-            this.direction = 'down'
-        } else if (this.direction !== 'right' && (this.keyboard.keyDownOnce(KeyboardKey.LEFT) || this.keyboard.keyDownOnce(KeyboardKey.A))) {
-            this.movementVector = new Point(-this.scale, 0);
-            this.direction = 'left'
-        } else if (this.direction !== 'left' && (this.keyboard.keyDownOnce(KeyboardKey.RIGHT) || this.keyboard.keyDownOnce(KeyboardKey.D))) {
-            this.movementVector = new Point(this.scale, 0);
-            this.direction = 'right'
-        }
-        if(this.cookie !== undefined && this.areSquaresTouching(this.snakeBody[0], this.cookie)) {
-            this.cookie = undefined;
-            this.createNewSquare();
-            this.snakeDidEat = true;
-        }
+    if (!this.paused) {
+      if (this.currentTicks >= this.ticksPerRound) {
+        this.updateSnake();
+        this.currentTicks -= this.ticksPerRound;
+      }
+      if (this.direction !== 'down' && (this.keyboard.keyDownOnce(KeyboardKey.UP) || this.keyboard.keyDownOnce(KeyboardKey.W))) {
+        this.movementVector = new Point(0, -this.scale);
+        this.direction = 'up';
+      } else if (this.direction !== 'up' && (this.keyboard.keyDownOnce(KeyboardKey.DOWN) || this.keyboard.keyDownOnce(KeyboardKey.S))) {
+        this.movementVector = new Point(0, this.scale);
+        this.direction = 'down';
+      } else if (this.direction !== 'right' && (this.keyboard.keyDownOnce(KeyboardKey.LEFT) || this.keyboard.keyDownOnce(KeyboardKey.A))) {
+        this.movementVector = new Point(-this.scale, 0);
+        this.direction = 'left';
+      } else if (this.direction !== 'left' && (this.keyboard.keyDownOnce(KeyboardKey.RIGHT) || this.keyboard.keyDownOnce(KeyboardKey.D))) {
+        this.movementVector = new Point(this.scale, 0);
+        this.direction = 'right';
+      }
+      if (this.cookie !== undefined && this.areSquaresTouching(this.snakeBody[0], this.cookie)) {
+        this.cookie = undefined;
+        this.createNewSquare();
+        this.snakeDidEat = true;
+      }
 
-        for(let i = 1; i < this.snakeBody.length; i++) {
-            if(this.areSquaresTouching(this.snakeBody[i], this.snakeBody[0])) {
-                this.initGame();
-            }
+      for (let i = 1; i < this.snakeBody.length; i++) {
+        if (this.areSquaresTouching(this.snakeBody[i], this.snakeBody[0])) {
+          this.initGame();
         }
-        this.currentTicks++;
+      }
+      this.currentTicks++;
     }
 
     if (this.keyboard.keyDownOnce(KeyboardKey.P)) {
-        this.paused = !this.paused;
+      this.paused = !this.paused;
     }
     if (this.keyboard.keyDownOnce(KeyboardKey.R) || this.gameOver) {
-        this.gameOver = false;
-        this.initGame();
-    }       
+      this.gameOver = false;
+      this.initGame();
+    }
   }
 
   draw(timestep) {
     this.snakeBody[0].geometryStyle = this.greenSquareStyle;
     this.snakeBody[0].draw();
-    for(let i = 1; i < this.snakeBody.length; i++) {
-        this.snakeBody[i].geometryStyle = this.whiteSquareStyle;
-        this.snakeBody[i].draw();
+    for (let i = 1; i < this.snakeBody.length; i++) {
+      this.snakeBody[i].geometryStyle = this.whiteSquareStyle;
+      this.snakeBody[i].draw();
     }
-    if(this.paused) {
-        this.pausedText.draw();
+    if (this.paused) {
+      this.pausedText.draw();
     }
-    if(this.cookie !== undefined) {
-        this.cookie.draw();
+    if (this.cookie !== undefined) {
+      this.cookie.draw();
     }
     this.scoreText.draw();
   }
 
   updateSnake() {
-      let movementPoint = this.movementVector.clone();
-      movementPoint.x *= 20;
-      movementPoint.y *= 20;
-      let newPoint = this.snakeBody[0].point.clone();
-      newPoint.x += movementPoint.x;
-      newPoint.y += movementPoint.y;
-      if(newPoint.x > this.width && this.direction === 'right') {
-          this.gameOver = true;
-      }
-      if(newPoint.x < 0 && this.direction === 'left') {
-          this.gameOver = true;
-      }
-      if(newPoint.y > this.height && this.direction === 'down') {
-          this.gameOver = true;
-      }
-      if(newPoint.y < 0 && this.direction === 'up') {
-        this.gameOver = true;
-      }
-      const head = new Rectangle(newPoint, this.unitPixel, this.unitPixel);
-      this.snakeBody.unshift(head);
-      if(!this.snakeDidEat) {
-        this.snakeBody.pop();
-      } else {
-          this.scoreText.text = `${this.snakeBody.length - 1}`;
-          this.snakeDidEat = false;
-      }
+    let movementPoint = this.movementVector.clone();
+    movementPoint.x *= 20;
+    movementPoint.y *= 20;
+    let newPoint = this.snakeBody[0].point.clone();
+    newPoint.x += movementPoint.x;
+    newPoint.y += movementPoint.y;
+    if (newPoint.x > this.width && this.direction === 'right') {
+      this.gameOver = true;
+    }
+    if (newPoint.x < 0 && this.direction === 'left') {
+      this.gameOver = true;
+    }
+    if (newPoint.y > this.height && this.direction === 'down') {
+      this.gameOver = true;
+    }
+    if (newPoint.y < 0 && this.direction === 'up') {
+      this.gameOver = true;
+    }
+    const head = new Rectangle(newPoint, this.unitPixel, this.unitPixel);
+    this.snakeBody.unshift(head);
+    if (!this.snakeDidEat) {
+      this.snakeBody.pop();
+    } else {
+      this.scoreText.text = `${this.snakeBody.length - 1}`;
+      this.snakeDidEat = false;
+    }
   }
 
   areSquaresTouching(square1, square2) {
-    return (square1.x < square2.x + square2.width &&
-        square1.x + square1.width > square2.x &&
-        square1.y < square2.y + square2.height &&
-        square1.y + square1.height > square2.y); 
+    return (
+      square1.x < square2.x + square2.width &&
+      square1.x + square1.width > square2.x &&
+      square1.y < square2.y + square2.height &&
+      square1.y + square1.height > square2.y
+    );
   }
 
   createNewSquare() {
@@ -179,18 +180,18 @@ export default class SnakeScene extends Scene {
     let potentialCookie = undefined;
 
     do {
-        let cookieX = Math.floor(Math.random() * (maxX - minX) + minX);
-        let cookieY = Math.floor(Math.random() * (maxY - minY) + minY);
-        potentialCookie = new Rectangle(new Point(cookieX, cookieY), this.unitPixel, this.unitPixel);
-        hasCollision = false;
-        for(let i = 0; i < this.snakeBody.length && !hasCollision; i++) {
-            let snakePart = this.snakeBody[i];
-            hasCollision = this.areSquaresTouching(snakePart, potentialCookie);
-        }
-    } while(hasCollision);
+      let cookieX = Math.floor(Math.random() * (maxX - minX) + minX);
+      let cookieY = Math.floor(Math.random() * (maxY - minY) + minY);
+      potentialCookie = new Rectangle(new Point(cookieX, cookieY), this.unitPixel, this.unitPixel);
+      hasCollision = false;
+      for (let i = 0; i < this.snakeBody.length && !hasCollision; i++) {
+        let snakePart = this.snakeBody[i];
+        hasCollision = this.areSquaresTouching(snakePart, potentialCookie);
+      }
+    } while (hasCollision);
     this.cookie = potentialCookie;
     this.cookie.geometryStyle = new GeometryStyle({
-        fillStyle: Color.PINK,
+      fillStyle: Color.PINK,
     });
   }
 }

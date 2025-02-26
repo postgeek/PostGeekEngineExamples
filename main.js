@@ -1,6 +1,7 @@
-import start from '@postgeek/post-geek-engine/lib/Game';
+import Game from '@postgeek/post-geek-engine/lib/Game';
 import CollisionScene from 'examples/CollisionScene';
 import SnakeScene from 'examples/SnakeScene';
+import WavemanScene from 'examples/Waveman';
 
 import './style.scss';
 
@@ -9,13 +10,14 @@ class Main {
     this._demos = [
       { key: 'snakescene', scene: SnakeScene, name: 'Snake' },
       { key: 'collisionscene', scene: CollisionScene, name: 'Collision Demo' },
-    ]
+      { key: 'wavescene', scene: WavemanScene, name: 'Waveman Demo' },
+    ];
   }
 
   initMenu() {
     const menuElement = document.getElementById('menu');
 
-    this._demos.forEach(demo => {      
+    this._demos.forEach((demo) => {
       const demoElement = document.createElement('li');
       demoElement.id = demo.key;
       demoElement.className = 'menu-item';
@@ -37,17 +39,18 @@ class Main {
   }
 
   runDemo(key) {
-    const demo = this._demos.find(d => d.key === key);
+    const demo = this._demos.find((d) => d.key === key);
     this._game.sceneManager.addScene({ key: demo.key, scene: demo.scene });
     this._game.sceneManager.startScene(demo.key, this._game);
   }
 
   start() {
-    this._game = start({
-      debug: true,
+    var index = 0; //this._demos.length - 1;
+    this._game = new Game({
       canvas: document.getElementById('canvas'),
-      initialScene: this._demos[0]
+      initialScene: this._demos[index],
     });
+    this._game.init();
   }
 }
 
