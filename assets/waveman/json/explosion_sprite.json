@@ -1,0 +1,177 @@
+{
+	"Id": "george",
+	"Type": "animatedSprite",
+	"SpriteSheetUrl": "./assets/waveman/images/explode.png",
+	"Loop": false,
+	"SpriteSheet": {
+		"width": 2048,
+		"height": 128
+	},
+	"animations": [
+		{
+			"animationName": "EXPLOSION",
+			"sprites": [
+				{
+					"tickDuration": 10,	
+					"position": 0,
+					"point": {
+						"x": 0,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+				{
+					"tickDuration": 10,
+					"position": 1,
+					"point": {
+						"x": 128,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+				{
+					"tickDuration": 10,
+					"position": 2,
+					"point": {
+						"x": 256,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+				{
+					"tickDuration": 10,
+					"position": 3,
+					"point": {
+						"x": 384,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 4,
+					"point": {
+						"x": 512,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 5,
+					"point": {
+						"x": 640,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 6,
+					"point": {
+						"x": 768,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 7,
+					"point": {
+						"x": 896,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 8,
+					"point": {
+						"x": 1024,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 9,
+					"point": {
+						"x": 1152,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 10,
+					"point": {
+						"x": 1280,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 11,
+					"point": {
+						"x": 1408,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 12,
+					"point": {
+						"x": 1536,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 13,
+					"point": {
+						"x": 1664,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 14,
+					"point": {
+						"x": 1792,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				},
+        {
+					"tickDuration": 10,
+					"position": 15,
+					"point": {
+						"x": 1920,
+						"y": 0
+					},
+					"width": 128,
+					"height": 128
+				}
+			]
+		}
+	]
+}
