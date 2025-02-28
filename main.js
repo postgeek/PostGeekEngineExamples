@@ -10,7 +10,7 @@ class Main {
     this._demos = [
       { key: 'snakescene', scene: SnakeScene, name: 'Snake' },
       { key: 'collisionscene', scene: CollisionScene, name: 'Collision Demo' },
-      { key: 'wavescene', scene: WavemanScene, name: 'Waveman Demo' },
+      { key: 'wavescene', scene: WavemanScene, name: 'Waveman Demo', background: './assets/waveman/images/waveman_game_background.jpg' },
     ];
   }
 
@@ -42,6 +42,11 @@ class Main {
     const demo = this._demos.find((d) => d.key === key);
     this._game.sceneManager.addScene({ key: demo.key, scene: demo.scene });
     this._game.sceneManager.startScene(demo.key, this._game);
+    if (demo.background != undefined) {
+      document.getElementsByTagName('html')[0].style.backgroundImage = `url('${demo.background}')`;
+    } else {
+      document.getElementsByTagName('html')[0].style.backgroundImage = '';
+    }
   }
 
   start() {

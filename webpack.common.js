@@ -9,36 +9,29 @@ module.exports = {
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
-      }
-    ]
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   resolve: {
     extensions: ['*', '.js'],
-    modules: [
-      path.resolve(`${__dirname}`),
-      path.resolve(`${__dirname}/node_modules`),
-    ],
+    modules: [path.resolve(`${__dirname}`), path.resolve(`${__dirname}/node_modules`)],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   plugins: [
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['!assets/*']
+      cleanOnceBeforeBuildPatterns: ['!assets/*'],
     }),
-    new HtmlWebpackPlugin({ 
-      template: './index.html' 
+    new HtmlWebpackPlugin({
+      template: './index.html',
     }),
-  ]
+  ],
 };

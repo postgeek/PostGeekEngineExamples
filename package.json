@@ -1,8 +1,8 @@
 {
   "name": "postgeekexamples",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Examples written using the PostGeekEngine",
+  "main": "main.js",
   "homepage": "http://postgeek.github.io/PostGeekEngineExamples",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
